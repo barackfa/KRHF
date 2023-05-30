@@ -75,8 +75,8 @@ http://wiki.ros.org/Robots/TurtleBot#Robots.2FTurtleBot.2Fkinetic.Packages
 
 http://wiki.ros.org/rviz
 
-# videó
-[![IMAGE ALT TEXT HERE](https://youtu.be/cpri8pE5wGg/0.jpg)](https://youtu.be/cpri8pE5wGg)
+# Videó
+[![videó link](https://youtu.be/cpri8pE5wGg/0.jpg)](https://youtu.be/cpri8pE5wGg)
 
 
 
