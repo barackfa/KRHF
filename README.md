@@ -72,6 +72,7 @@ Ezt követően nyissunk egy újabb terminált, ahol újra lépjünk be ssh-val.
 
 # Felhasznált csomagok
 http://wiki.ros.org/Robots/TurtleBot#Robots.2FTurtleBot.2Fkinetic.Packages
+
 http://wiki.ros.org/rviz
 
 
