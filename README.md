@@ -69,6 +69,11 @@ python3 -m pip install tflite-runtime
 ```
 Ezt követően nyissunk egy újabb terminált, ahol újra lépjünk be ssh-val.
 
+
+# Felhasznált csomagok
+http://wiki.ros.org/Robots/TurtleBot#Robots.2FTurtleBot.2Fkinetic.Packages
+
+
 # ettől
 A neurális háló futtatásához, először tanítani kell ezt. Ehhez képeket készítettünk, majd ezeket osztályoztuk és tanítottuk a CNN-t.
 A képek készítéshez először indítsuk el a roboton a bringup fájlt.
