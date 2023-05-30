@@ -85,7 +85,7 @@ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 Kellő mennyiségű kép készítését követően osztályozni kell, majd pedig tanítani a modellt. Ezt a számítógépen végezzük, mert a robot tárhely/RAM kapacitása kisebb egy személyi számítógéphez képest kevés. Emiatt a ```line_follower_cnn.py``` fájlt is módosítani kell tensorflow lite csomagra, a modellt is át kell alakítani.
 # eddig újragondolni
 
-
+Dalalalala
 
 
 
