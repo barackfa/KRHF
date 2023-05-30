@@ -86,6 +86,7 @@ Kellő mennyiségű kép készítését követően osztályozni kell, majd pedig
 # eddig újragondolni
 
 Dalalalala
+Dalalalala
 
 
 
