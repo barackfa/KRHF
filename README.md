@@ -40,14 +40,21 @@ nano .bashrc
 WORKSPACE=~/catkin_ws/devel/setup.bash
 source $WORKSPACE
 ```
-Ezt követően töltsük le a MOGI turtlebot3 verziót, majd a ```mogi-ros``` branch-re lépjünk át.
+Ezt követően töltsük le a MOGI turtlebot3 módosított verzióját.
 ```
+cd catkin_ws/src/
+git clone https://github.com/barackfa/KRHF
+cd catkin_ws/ 
+catkin_make
+```
+tartalékba itt hagyom
+```
+cd catkin_ws/src/
 git clone https://github.com/MOGI-ROS/turtlebot3
 git checkout mogi-ros
+cd catkin_ws/ 
+catkin_make
 ````
-?? itt kell catkin_ws??
-
-Ezt követően töltsük le a line_follower_cnn.py és model.best.h5 fájlokat és cseréljük le a mogi turtlebot3 meglévő fájljait.
 
 A robotra való bejeltkezést ssh-val oldjuk meg. Ehhez szükséges, hogy azonos hálón legyünk a robottal. A laborban lévő 2 robot ip címe: ```192.168.50.111``` valamint ```192.168.50.175```, ezek közül az egyikre lesz szükségünk.
 ```
@@ -56,11 +63,11 @@ vagy
 ssh 192.168.50.175 -lubuntu
 pw: ubuntu
 ```
-A turtlebot véges memória kapacitása miatt tensorflow lite-ot kell telepíteni, és ezzel futtatható a tanított neurális háló. 
+A turtlebot véges memória kapacitása miatt tensorflow lite-ot kell telepíteni, és ezzel futtatható a tanított és aztán átkonvertált neurális háló. 
 ```
 python3 -m pip install tflite-runtime
 ```
-
+Ezt követően nyissunk egy újabb terminált, ahol újra lépjünk be ssh-val.
 
 # ettől
 A neurális háló futtatásához, először tanítani kell ezt. Ehhez képeket készítettünk, majd ezeket osztályoztuk és tanítottuk a CNN-t.
