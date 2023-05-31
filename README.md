@@ -20,7 +20,7 @@ Ezután a valós roboton is leteszteltük az elkészült vonalkövető rendszert
 
 
 
-### Telepítési útmutató
+## Telepítési útmutató
 Első lépésként hozzuk létre a csomagunkat tartalmazó workspace-t. Majd a catkin_make paranccsal fordítsuk.
 ```
 cd ~
@@ -82,7 +82,7 @@ A képre való kattintást követően továbbirányít.
 
 
 
-# ettől
+# ettől //törölni is lehet
 A neurális háló futtatásához, először tanítani kell ezt. Ehhez képeket készítettünk, majd ezeket osztályoztuk és tanítottuk a CNN-t.
 A képek készítéshez először indítsuk el a roboton a bringup fájlt.
 ```
