@@ -1,5 +1,4 @@
 # Kognitív robotika Házi Feladat
-Kognitív robotika HF1
 
 Feladatunk vonalkövetés megvalósítása volt turtlebottal és neurűlis hálóval.
 A neurális hálót a roboton kellett futtatnunk egy külön számítógép helyett.
@@ -17,6 +16,19 @@ A valós robottal több, mint 100 képet készítettünk a valós környezetről
 Így egy újabb tanítás és neurális háló egyszerűsítés következett.
 Az új, elkészült modellt átalakítottuk a Tensorflow Lite könyvtárnak megfelelően, és ismét szimulációban teszteltük a működését.
 Ezután a valós roboton is leteszteltük az elkészült vonalkövető rendszert.
+
+
+## Tartalomjegyzék
+
+1. [Telepítési útmutató](#telepítési-útmutató)
+2. [Dependency-k](#dependency-k)
+3. [Felhasznált csomagok](#felhasznált-csomagok)
+4. [Videó](#videó)
+5. [A neurális háló tanítása](#a-neurális-háló-tanítása)
+    - [Modell létrehozása](#modell-létrehozása)
+    - [A modell átkonvertálása](#a-modell-átkonvertálása)
+    - [Új line follower node létrehozása](#új-line-follower-node-létrehozása)
+    - [A megtanított modell tesztelése](#a-megtanított-modell-tesztelése)
 
 
 
@@ -202,10 +214,3 @@ Az elkészített modellt először szimulációban számítógépen futtatva tes
 
 Végül pedig a laborban a roboton futtatva is teszteltük a modellt, ami sikeresen követte a vonalat.
 ![Kép link](https://github.com/barackfa/KRHF/blob/main/assets/kep02.jpeg)
-
-
-
-
-
-
-
