@@ -74,7 +74,7 @@ python3 -m pip install tflite-runtime
 ```
 Ezt követően át kell mozgatni a csomagot a robotra, ezt megtehetjük parancsból és ubuntu rendszer alatt a fájlrendszerben a robotra csatlakozva is. Terminálból az alábbi minta alapján végezhető el a mozgatás.
 ```
-scp -r /path/to/local/source user@ssh.example.com:/path/to/remote/destination 
+scp -r /home/catkin_ws/src/turtlebot3/turtlebot3_mogi ubuntu@192.168.50.175:~/catkin_ws/src/ 
 ```
 
 ## Dependency-k
@@ -212,5 +212,14 @@ Ezek a legfőbb módosítások, a többi (pl. verziók kiíratása és ellenőrz
 Az elkészített modellt először szimulációban számítógépen futtatva teszteltük. Itt több szenárióba elhelyezve is meggyőzödhettünk a modell helyes működésén.
 ![Kép link](https://github.com/barackfa/KRHF/blob/main/assets/kep01.png)
 
-Végül pedig a laborban a roboton futtatva is teszteltük a modellt, ami sikeresen követte a vonalat.
+A laborban a roboton történő futtatáshoz pedig két terminálablakra van szükségünk, amelyeken beléptünk a robotra. Az egyiken futtathatjuk a bringup-ot, amely elindítja a kamerát:
+```
+roslaunch turtlebot3_mogi simulation_line_follow.launch
+```
+A másikon pedig futtathatjuk a megírt node-unkat:
+```
+rosrun turtlebot3_mogi line_follower_cnn_hf.py
+```
+
+Így is teszteltük a modellt, ami sikeresen követte a vonalat.
 ![Kép link](https://github.com/barackfa/KRHF/blob/main/assets/kep02.jpeg)
