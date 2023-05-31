@@ -7,4 +7,4 @@
 - Korábbi lépésekkel párhuzamosan a laboron tanultak alapján roboton való futtatás kiismerése a laboron kiadott kódokkal
 - A szimulációban letesztelt kód futtatása és tesztelése a valós roboton
 - Felvétel készítése a működésről
-- Projekt mumka dokumentálása
+- Projekt munka dokumentálása
