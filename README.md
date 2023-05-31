@@ -121,9 +121,9 @@ Amennyiben egyedül vagyunk, akkor egy újabb terminálban a teleop indításáv
 ```
 roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 ```
-Hogy minél, több képpel tudjuk elvégezni a modell betanítását, és hogy kellően generikus legyen az, a szimulációban futtatva is készítettünk több képet is.
-Ezeket a képeket pedig osztályoztuk a laboron látott megfelelő módon annak megfelelően, hogy mit szeretnénk mit csináljon a robot, mikor az adott képet kapja bemenetként.
-Majd ezekkel a képekkel végezzük a tanítást a ```train_network.py``` segítségével. Ezt a számítógépen végezzük, mert a robot tárhely/RAM kapacitása kisebb egy személyi számítógéphez képest kevés.
+Hogy minél több képpel tudjuk elvégezni a modell betanítását, és hogy kellően generikus legyen az, a szimulációban futtatva is készítettünk több képet.
+Ezeket a képeket pedig osztályoztuk a laboron látott módon annak megfelelően, hogy mit szeretnénk, hogy csináljon a robot, mikor az adott képet kapja bemenetként.
+Majd ezekkel a képekkel végezzük a tanítást a ```train_network.py``` segítségével számítógépen, mert a robot tárhely/RAM kapacitása kisebb egy személyi számítógépéhez képest.
 
 Egyik fő kihívás a feladatunkban, hogy kisebb méretű neurális hálót állítsunk elő, ami még működő képes. Ehhez módosítanunk kellett az órán kiadott ```train_network.py``` kódot.
 Több lehetőséggel is próbálkoztunk, például a 3 rétegű RGB képek 1 rétegű szürkeárnyalatossá alakításával, azonban ez nem hozta meg a kívánt hatást.
