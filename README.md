@@ -103,6 +103,66 @@ roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 ```
 
 Kellő mennyiségű kép készítését követően osztályozni kell, majd pedig tanítani a modellt. Ezt a számítógépen végezzük, mert a robot tárhely/RAM kapacitása kisebb egy személyi számítógéphez képest kevés. Emiatt a ```line_follower_cnn.py``` fájlt is módosítani kell tensorflow lite csomagra, a modellt is át kell alakítani.
+
+### A modell átkonvertálása
+Mivel TensorFlow helyett csak a TensorFlow Lite verziót tudjuk használni, ezért szükséges a modellt átkonvertálnunk. Ehhez létrehoztunk egy külön lefuttatható Python scriptet, amely segítségével a korábban generált Keras modellből TFLite modellt készítünk a megfelelő path-ok megadásával:
+
+```python
+import tensorflow as tf
+
+# Load the original Keras model
+model = tf.keras.models.load_model('/home/catkin_ws/src/turtlebot3/turtlebot3_mogi/network_model/model.best.h5')
+
+# Convert the model to TensorFlow Lite
+converter = tf.lite.TFLiteConverter.from_keras_model(model)
+tflite_model = converter.convert()
+
+# Save the TFLite model.
+with open('/home/catkin_ws/src/turtlebot3/turtlebot3_mogi/network_model/model.tflite', 'wb') as f:
+    f.write(tflite_model)
+```
+
+### Új line follower node létrehozása
+A vonalkövetés megvalósítását a TensorFlow Lite csomag segítségével végezzük. Emiatt az órán megírt ```line_follower_cnn.py``` fájt több helyen is módosítanunk kellett.
+
+A több, TensorFlow-hoz szükséges csomag helyett elegendő a TFLite-ot importálni:
+```python
+import tflite_runtime.interpreter as tflite
+```
+
+TensorFlow esetén elég volt betölteni a modellt a ```load_model``` segítségével, a predikció pedig a ```model(image)``` segítségével történt. Azonban TensorFLow Lite használata esetén létre kellett hozni egy ```Interpreter``` objektumot, allokálni a tenzorokat, majd a predikcióhoz használni a ```set_tensor``` és ```invoke``` függvényeket.
+
+```python
+# Load TFLite model and allocate tensors
+interpreter = tflite.Interpreter(model_path=model_path)
+interpreter.allocate_tensors()
+
+# Get input and output tensors.
+input_details = interpreter.get_input_details()
+output_details = interpreter.get_output_details()
+```
+
+A képfeldolgozó függvény módosítása is szükséges volt. A képet array-é alakítás után 4D-ssé formáztuk, mivel a TensorFlow Lite modellnek szüksége van a batch dimenzió megadására is a futáshoz.
+```python
+def processImage(self, img):
+        image = cv2.resize(img, (image_size, image_size))
+        image = np.reshape(image, (-1, image_size, image_size, 3)).astype("float32") / 255.0
+
+        # Set the value of the input tensor
+        interpreter.set_tensor(input_details[0]['index'], image)
+        interpreter.invoke()
+
+        # Retrieve the value of the output tensor
+        prediction = np.argmax(interpreter.get_tensor(output_details[0]['index']))
+        
+        [...]
+```
+
+Ezek a legfőbb módosítások, a többi (pl. verziók kiíratása és ellenőrzése, megjelenítéssel kapcsolatos funkciók eltávolítása) megtalálható a feltöltött ```line_follower_cnn_hf.py``` fájlban.
+
+
+
+
 # eddig újragondolni
 
 Dalalalala
