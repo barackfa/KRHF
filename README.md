@@ -212,7 +212,7 @@ Ezek a legfőbb módosítások, a többi (pl. verziók kiíratása és ellenőrz
 Az elkészített modellt először szimulációban számítógépen futtatva teszteltük. Itt több szenárióba elhelyezve is meggyőzödhettünk a modell helyes működésén.
 ![Kép link](https://github.com/barackfa/KRHF/blob/main/assets/kep01.png)
 
-A laborban a roboton történő futtatáshoz pedig két terminálablakra van szükségünk, amelyeken beléptünk a robotra. Az egyiken futtathatjuk a bringup-ot, amely elindítja a kamerát:
+A laborban a roboton történő futtatáshoz először a fentebb is írt scp-vel tudjuk átmozgatni a megfelelő fájlokat, majd két terminálablakra van szükségünk, amelyeken beléptünk a robotra. Az egyiken futtathatjuk a bringup-ot, amely elindítja a kamerát:
 ```
 roslaunch turtlebot3_mogi simulation_line_follow.launch
 ```
