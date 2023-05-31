@@ -1,5 +1,5 @@
-# KRHF
-Kognitív robotika HF
+# Kognitív robotika Házi Feladat
+Kognitív robotika HF1
 
 Feladatunk vobalkövetés megvalósítása volt turtlebottal és neurűlis hálóval.
 A neurális hálót a roboton kellett futtatnunk egy külön számítógép helyett.
@@ -47,14 +47,7 @@ git clone https://github.com/barackfa/KRHF
 cd catkin_ws/ 
 catkin_make
 ```
-tartalékba itt hagyom
-```
-cd catkin_ws/src/
-git clone https://github.com/MOGI-ROS/turtlebot3
-git checkout mogi-ros
-cd catkin_ws/ 
-catkin_make
-````
+
 
 A robotra való bejeltkezést ssh-val oldjuk meg. Ehhez szükséges, hogy azonos hálón legyünk a robottal. A laborban lévő 2 robot ip címe: ```192.168.50.111``` valamint ```192.168.50.175```, ezek közül az egyikre lesz szükségünk.
 ```
@@ -67,7 +60,10 @@ A turtlebot véges memória kapacitása miatt tensorflow lite-ot kell telepíten
 ```
 python3 -m pip install tflite-runtime
 ```
-Ezt követően nyissunk egy újabb terminált, ahol újra lépjünk be ssh-val.
+Ezt követően át kell mozgatni a csomagot a robotra, ezt megtehetjük parancsból és ubuntu rendszer alatt a fájlrendszerben a robotra csatlakozva is.
+```
+scp -r /path/to/local/source user@ssh.example.com:/path/to/remote/destination 
+```
 
 
 # Felhasznált csomagok
@@ -80,6 +76,8 @@ http://wiki.ros.org/gazebo_ros_pkgs
 
 
 # Videó
+
+A képre való kattintást követően továbbirányít.
 [![videó link](https://i3.ytimg.com/vi/cpri8pE5wGg/maxresdefault.jpg)](https://youtu.be/cpri8pE5wGg)
 
 
