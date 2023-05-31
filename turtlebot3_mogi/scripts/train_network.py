@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 from numpy.random import seed
 
 # Set image size
-image_size = 24
+image_size = 8
 
 config = ConfigProto()
 config.gpu_options.allow_growth = True
@@ -42,12 +42,12 @@ def build_LeNet(width, height, depth, classes):
     inputShape = (height, width, depth)
 
     # first set of CONV => RELU => POOL layers
-    model.add(Conv2D(20, (5, 5), padding="same", input_shape=inputShape))
+    model.add(Conv2D(6, (5, 5), padding="same", input_shape=inputShape))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # second set of CONV => RELU => POOL layers
-    model.add(Conv2D(50, (5, 5), padding="same"))
+    model.add(Conv2D(20, (5, 5), padding="same"))
     model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
@@ -77,6 +77,8 @@ random.shuffle(imagePaths)
 for imagePath in imagePaths:
     # load the image, pre-process it, and store it in the data list
     image = cv2.imread(imagePath)
+    # MODIFICATION BY GERI!!!
+    #image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = cv2.resize(image, (image_size, image_size))
     image = img_to_array(image)
     data.append(image)
@@ -108,13 +110,14 @@ testY = to_categorical(testY, num_classes=4)
 
 # initialize the number of epochs to train for, initial learning rate,
 # and batch size
-EPOCHS  = 40
+EPOCHS  = 100
 INIT_LR = 0.001
 DECAY   = INIT_LR / EPOCHS
-BS      = 32
+BS      = 15
 
 # initialize the model
 print("[INFO] compiling model...")
+# MODIFICATION BY GERI!!!
 model = build_LeNet(width=image_size, height=image_size, depth=3, classes=4)
 opt = Adam(learning_rate=INIT_LR, decay=DECAY)
 model.compile(loss="binary_crossentropy", optimizer=opt, metrics=["accuracy"])
