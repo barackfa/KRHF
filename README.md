@@ -65,6 +65,10 @@ Ezt követően át kell mozgatni a csomagot a robotra, ezt megtehetjük parancsb
 scp -r /path/to/local/source user@ssh.example.com:/path/to/remote/destination 
 ```
 
+## Dependency-k
+
+![Kép link](https://github.com/barackfa/KRHF/blob/main/assets/graph.png)
+
 
 ## Felhasznált csomagok
 http://wiki.ros.org/Robots/TurtleBot#Robots.2FTurtleBot.2Fkinetic.Packages
@@ -112,9 +116,28 @@ Majd ezekkel a képekkel végezzük a tanítást a ```train_network.py``` segít
 Egyik fő kihívás a feladatunkban, hogy kisebb méretű neurális hálót állítsunk elő, ami még működő képes. Ehhez módosítanunk kellett az órán kiadott ```train_network.py``` kódot.
 Több lehetőséggel is próbálkoztunk, például a 3 rétegű RGB képek 1 rétegű szürkeárnyalatossá alakításával, azonban ez nem hozta meg a kívánt hatást.
 Az így készített neurális háló mérete nem csökkent számottevően, és kisebb pontossággal tudott betanulni.
+A megoldást végül az jelentette, hogy a tanuláshoz használt kép méretét levettük mindössze 8x8-asra, illetve a LeNet-5 jellegű hálónál csökkentettük a paramétereket, kisebbra szabtuk a robotunk "agyát".
 
+```python
 
-Emiatt a ```line_follower_cnn.py``` fájlt is módosítani kell tensorflow lite csomagra, a modellt is át kell alakítani.
+    # first set of CONV => RELU => POOL layers
+    model.add(Conv2D(6, (5, 5), padding="same", input_shape=inputShape))
+    model.add(Activation("relu"))
+    model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+
+    # second set of CONV => RELU => POOL layers
+    model.add(Conv2D(20, (5, 5), padding="same"))
+    model.add(Activation("relu"))
+    model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
+
+    # first (and only) set of FC => RELU layers
+    model.add(Flatten())
+    model.add(Dense(500))
+    model.add(Activation("relu"))
+```
+Így már kellő pontossággal sikerült betanítanunk a modellünket, ami kb. huszad akkora lett, mint a laboron készített.
+
+![Kép link](https://github.com/barackfa/KRHF/blob/main/assets/model_training.png)
 
 ### A modell átkonvertálása
 Mivel TensorFlow helyett csak a TensorFlow Lite verziót tudjuk használni, ezért szükséges a modellt átkonvertálnunk. Ehhez létrehoztunk egy külön lefuttatható Python scriptet, amely segítségével a korábban generált Keras modellből TFLite modellt készítünk a megfelelő path-ok megadásával:
@@ -172,10 +195,14 @@ def processImage(self, img):
 
 Ezek a legfőbb módosítások, a többi (pl. verziók kiíratása és ellenőrzése, megjelenítéssel kapcsolatos funkciók eltávolítása) megtalálható a feltöltött ```line_follower_cnn_hf.py``` fájlban.
 
+### A megtanított modell tesztelése
 
+Az elkészített modellt először szimulációban számítógépen futtatva teszteltük. Itt több szenárióba elhelyezve is meggyőzödhettünk a modell helyes működésén.
+![Kép link](https://github.com/barackfa/KRHF/blob/main/assets/kep01.png)
 
+Végül pedig a laborban a roboton futtatva is teszteltük a modellt, ami sikeresen követte a vonalat.
+![Kép link](https://github.com/barackfa/KRHF/blob/main/assets/kep02.jpeg)
 
-# eddig újragondolni
 
 
 
