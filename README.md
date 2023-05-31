@@ -72,7 +72,7 @@ A turtlebot véges memória kapacitása miatt tensorflow lite-ot kell telepíten
 ```
 python3 -m pip install tflite-runtime
 ```
-Ezt követően át kell mozgatni a csomagot a robotra, ezt megtehetjük parancsból és ubuntu rendszer alatt a fájlrendszerben a robotra csatlakozva is.
+Ezt követően át kell mozgatni a csomagot a robotra, ezt megtehetjük parancsból és ubuntu rendszer alatt a fájlrendszerben a robotra csatlakozva is. Terminálból az alábbi minta alapján végezhető el a mozgatás.
 ```
 scp -r /path/to/local/source user@ssh.example.com:/path/to/remote/destination 
 ```
