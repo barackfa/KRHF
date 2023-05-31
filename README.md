@@ -1,6 +1,6 @@
 # Kognitív robotika Házi Feladat
 
-Feladatunk vonalkövetés megvalósítása volt turtlebottal és neurűlis hálóval.
+Feladatunk vonalkövetés megvalósítása volt TurtleBottal és neurális hálóval.
 A neurális hálót a roboton kellett futtatnunk egy külön számítógép helyett.
 Ennek érdekében minél kisebb és gyorsabb, de a feladat megvalósításához még megfelelő méretű neurális háló létrehozására törekedtünk.
 Az elkészült vonalkövető rendszert a valós roboton kellett tesztelnünk és bemutatnunk.
