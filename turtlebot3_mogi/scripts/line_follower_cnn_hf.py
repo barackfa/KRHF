@@ -37,20 +37,8 @@ print("[INFO] Version:")
 print("OpenCV version: %s" % cv2.__version__)
 print("TFLite model: %s" % model_path)
 print("CNN model: %s" % model_path)
-#f = h5py.File(model_path, mode='r')
-#model_version = f.attrs.get('keras_version')
-#print("Model's Keras version: %s" % model_version)
-
-#if model_version != keras_version:
-#    print('You are using Keras version ', keras_version, ', but the model was built using ', #model_version)
-
-# Finally load model:
-#model = load_model(model_path)
 
 class BufferQueue(Queue):
-    """Slight modification of the standard Queue that discards the oldest item
-    when adding an item and the queue is full.
-    """
     def put(self, item, *args, **kwargs):
         # The base implementation, for reference:
         # https://github.com/python/cpython/blob/2.7/Lib/Queue.py#L107
@@ -82,22 +70,12 @@ class cvThread(threading.Thread):
 
     
     def run(self):
-        '''
-        # Create a single OpenCV window
-        cv2.namedWindow("frame", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("frame", 800,600)
-	'''
         while True:
             self.image = self.queue.get()
 
             # Process the current image
             mask = self.processImage(self.image)
-            '''
-            # Add processed images as small images on top of main image
-            result = self.addSmallPictures(self.image, [mask])
-            cv2.imshow("frame", result)
-            '''
-	    
+
             # Check for 'q' key to exit
             k = cv2.waitKey(1) & 0xFF
             if k in [27, ord('q')]:
@@ -142,32 +120,6 @@ class cvThread(threading.Thread):
         
         # Return processed frames
         return cv2.resize(img, (image_size, image_size))
-
-    # Add small images to the top row of the main image
-    def addSmallPictures(self, img, small_images, size=(160, 120)):
-        '''
-        :param img: main image
-        :param small_images: array of small images
-        :param size: size of small images
-        :return: overlayed image
-        '''
-
-        x_base_offset = 40
-        y_base_offset = 10
-
-        x_offset = x_base_offset
-        y_offset = y_base_offset
-
-        for small in small_images:
-            small = cv2.resize(small, size)
-            if len(small.shape) == 2:
-                small = np.dstack((small, small, small))
-
-            img[y_offset: y_offset + size[1], x_offset: x_offset + size[0]] = small
-
-            x_offset += size[0] + x_base_offset
-
-        return img
 
 def queueMonocular(msg):
     try:
