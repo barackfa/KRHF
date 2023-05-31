@@ -1,7 +1,7 @@
 # Kognitív robotika Házi Feladat
 Kognitív robotika HF1
 
-Feladatunk vobalkövetés megvalósítása volt turtlebottal és neurűlis hálóval.
+Feladatunk vonalkövetés megvalósítása volt turtlebottal és neurűlis hálóval.
 A neurális hálót a roboton kellett futtatnunk egy külön számítógép helyett.
 Ennek érdekében minél kisebb és gyorsabb, de a feladat megvalósításához még megfelelő méretű neurális háló létrehozására törekedtünk.
 Az elkészült vonalkövető rendszert a valós roboton kellett tesztelnünk és bemutatnunk.
@@ -73,6 +73,8 @@ http://wiki.ros.org/rviz
 
 http://wiki.ros.org/gazebo_ros_pkgs
 
+http://wiki.ros.org/rqt_dep
+
 
 
 ## Videó
@@ -82,7 +84,9 @@ A képre való kattintást követően továbbirányít.
 
 
 
-# ettől //törölni is lehet
+## A neurális háló tanítása
+
+### Modell létrehozása
 A neurális háló futtatásához, először tanítani kell ezt. Ehhez képeket készítettünk, majd ezeket osztályoztuk és tanítottuk a CNN-t.
 A képek készítéshez először indítsuk el a roboton a bringup fájlt.
 ```
@@ -101,8 +105,16 @@ Amennyiben egyedül vagyunk, akkor egy újabb terminálban a teleop indításáv
 ```
 roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
 ```
+Hogy minél, több képpel tudjuk elvégezni a modell betanítását, és hogy kellően generikus legyen az, a szimulációban futtatva is készítettünk több képet is.
+Ezeket a képeket pedig osztályoztuk a laboron látott megfelelő módon annak megfelelően, hogy mit szeretnénk mit csináljon a robot, mikor az adott képet kapja bemenetként.
+Majd ezekkel a képekkel végezzük a tanítást a ```train_network.py``` segítségével. Ezt a számítógépen végezzük, mert a robot tárhely/RAM kapacitása kisebb egy személyi számítógéphez képest kevés.
 
-Kellő mennyiségű kép készítését követően osztályozni kell, majd pedig tanítani a modellt. Ezt a számítógépen végezzük, mert a robot tárhely/RAM kapacitása kisebb egy személyi számítógéphez képest kevés. Emiatt a ```line_follower_cnn.py``` fájlt is módosítani kell tensorflow lite csomagra, a modellt is át kell alakítani.
+Egyik fő kihívás a feladatunkban, hogy kisebb méretű neurális hálót állítsunk elő, ami még működő képes. Ehhez módosítanunk kellett az órán kiadott ```train_network.py``` kódot.
+Több lehetőséggel is próbálkoztunk, például a 3 rétegű RGB képek 1 rétegű szürkeárnyalatossá alakításával, azonban ez nem hozta meg a kívánt hatást.
+Az így készített neurális háló mérete nem csökkent számottevően, és kisebb pontossággal tudott betanulni.
+
+
+Emiatt a ```line_follower_cnn.py``` fájlt is módosítani kell tensorflow lite csomagra, a modellt is át kell alakítani.
 
 ### A modell átkonvertálása
 Mivel TensorFlow helyett csak a TensorFlow Lite verziót tudjuk használni, ezért szükséges a modellt átkonvertálnunk. Ehhez létrehoztunk egy külön lefuttatható Python scriptet, amely segítségével a korábban generált Keras modellből TFLite modellt készítünk a megfelelő path-ok megadásával:
@@ -164,9 +176,6 @@ Ezek a legfőbb módosítások, a többi (pl. verziók kiíratása és ellenőrz
 
 
 # eddig újragondolni
-
-Dalalalala
-Dalalalala
 
 
 
