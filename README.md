@@ -66,7 +66,7 @@ scp -r /path/to/local/source user@ssh.example.com:/path/to/remote/destination
 ```
 
 
-# Felhasznált csomagok
+## Felhasznált csomagok
 http://wiki.ros.org/Robots/TurtleBot#Robots.2FTurtleBot.2Fkinetic.Packages
 
 http://wiki.ros.org/rviz
@@ -75,7 +75,7 @@ http://wiki.ros.org/gazebo_ros_pkgs
 
 
 
-# Videó
+## Videó
 
 A képre való kattintást követően továbbirányít.
 [![videó link](https://i3.ytimg.com/vi/cpri8pE5wGg/maxresdefault.jpg)](https://youtu.be/cpri8pE5wGg)
